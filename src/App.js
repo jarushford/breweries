@@ -1,24 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';
+import React, { useEffect, useState, useReducer } from 'react';
+import AppContext from './AppContext';
+import './App.scss';
 
+const initialState = {
+  breweries: [],
+  currentPage: 1
+}
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'SET_BREWERIES':
+      return {...state, breweries: action.breweryList };
+    case 'SET_CURRENT_PAGE':
+      return {...state, currentPage: action.currentPage };
+    default:
+      return state;
+  } 
+}
 
 function App() {
-  const [breweries, setBreweries] = useState([]);
-  const [currentPage, setCurrentPage ] = useState(1);
+  const [state, dispatch] = useReducer(reducer, initialState);
   const [error, setError ] = useState('');
 
   const getBreweries = async () => {
-    const url = `https://api.openbrewerydb.org/breweries?by_state=colorado&per_page=25&page=${currentPage}`
+    const url = `https://api.openbrewerydb.org/breweries?by_state=colorado&per_page=25&page=${state.currentPage}`
     setError('');
 
     try {
       const response = await fetch(url);
       const breweryList = await response.json();
       if (breweryList.length === 0) {
-        setCurrentPage(currentPage - 1)
+        dispatch({ type: 'SET_CURRENT_PAGE', currentPage: state.currentPage - 1 })
       } else {
-        setBreweries(breweryList);
+        dispatch({ type: 'SET_BREWERIES', breweryList })
       }
     } catch(error) {
       setError(error.message);
@@ -27,25 +41,29 @@ function App() {
 
   useEffect(() => {
     getBreweries();
-  }, [currentPage])
+  }, [state.currentPage])
 
   return (
-    <div>
-      <h1>Colorado Brewery List</h1>
-      { error && error }
-      {JSON.stringify(breweries)}
-      <footer>
-        <button onClick={() => {
-          if (currentPage >1) {
-            setCurrentPage(currentPage - 1)
-          }
-        }}> Back </button>
-        <span>{currentPage}</span>
-        <button onClick={() => {
-            setCurrentPage(currentPage + 1)
-        }}> Forward </button>
-      </footer>
-    </div>
+    <AppContext.Provider value={[state, dispatch]}>
+      <div>
+        <header>
+          <h1>Colorado Brewery List</h1>
+          { error && <h4>error</h4> }
+        </header>
+        <main>{JSON.stringify(state.breweries)}</main>
+        <footer>
+          <button onClick={() => {
+            if (state.currentPage > 1) {
+              dispatch({ type: 'SET_CURRENT_PAGE', currentPage: state.currentPage - 1 })
+            }
+          }}> Back </button>
+          <h4>{state.currentPage}</h4>
+          <button onClick={() => {
+              dispatch({ type: 'SET_CURRENT_PAGE', currentPage: state.currentPage + 1 })
+          }}> Forward </button>
+        </footer>
+      </div>
+    </AppContext.Provider>
   );
 }
 
