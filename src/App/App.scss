@@ -1,0 +1,47 @@
+@import '../index.scss';
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+header {
+    background-color: $global-light-green;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    img {
+      width: 100px;
+      margin: 10px 5px;
+    }
+    
+    h1 {
+        color: $global-dark-green;
+        outline: black;      
+        margin: 0 0 -38px 0;
+        padding: 0;
+        font-size: 100px;
+        height: fit-content;
+    }
+
+    h4 {
+        margin-top: 0;
+        padding-bottom: 15px;
+    }
+}
+
+main {
+    padding: 20px;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+
+    button {
+        margin: 10px 25px;
+        width: 100px;
+    }
+}
