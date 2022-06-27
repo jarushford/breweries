@@ -6,23 +6,28 @@ body {
 
 header {
     background-color: $global-light-green;
-    margin-bottom: 10px;
+    margin-bottom: 0;
+    width: 100%;
+    z-index: 10;
+    position: absolute;
     display: flex;
     justify-content: flex-start;
     align-items: center;
 
     img {
-      width: 100px;
-      margin: 10px 5px;
+      width: 75px;
+      margin: 0 2px 0 8px;
+      transform: rotate(45deg);
     }
     
-    h1 {
-        color: $global-dark-green;
-        outline: black;      
-        margin: 0 0 -38px 0;
-        padding: 0;
-        font-size: 100px;
-        height: fit-content;
+    h1 {   
+      color: #53a554;
+      outline: black;
+      margin: 0px 0 -19px 0;
+      padding: 0;
+      font-size: 101px;
+      height: 89px;
+      line-height: 63px;
     }
 
     h4 {

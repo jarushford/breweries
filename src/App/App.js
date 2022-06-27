@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useReducer } from 'react';
 import AppContext from '../AppContext';
 import BreweriesList from '../BreweriesList/BreweriesList';
+import MapContainer from '../Map/MapContainer';
 import './App.scss';
-import hop from '../assets/hop.png';
+import hop from '../assets/favicon.ico';
 
 const initialState = {
   breweries: [],
@@ -53,6 +54,7 @@ function App() {
           <img src={hop}/>
           <h1>BeerHop</h1>
         </header>
+        <MapContainer />
         <main>
           <BreweriesList />
         </main>
