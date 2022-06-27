@@ -45,6 +45,7 @@ function App() {
 
   useEffect(() => {
     getBreweries();
+    
   }, [state.currentPage])
 
   return (

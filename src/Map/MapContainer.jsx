@@ -8,7 +8,7 @@ const MapContainer = () => {
   const [ state, dispatch ] = useContext(AppContext);
 
   const closeBreweries = state.breweries.map(b => {
-
+    return <Marker position={currentPosition} />
   })
   
   const success = position => {
@@ -28,20 +28,20 @@ const MapContainer = () => {
     navigator.geolocation.getCurrentPosition(success);
   })
 
-  
   return (
      <LoadScript
        googleMapsApiKey='AIzaSyClqjDMJq60R-caqxkXXXX-W0tqN5kve_E'>
         <GoogleMap
-          // onLoad={async m => {
-          //   const map = await m;
-          //   const bounds = await map.getBounds();
-          //   console.log(bounds)
-          // }}
           mapContainerStyle={mapStyles}
           zoom={12}
-          center={currentPosition}
-        />
+          center={currentPosition}>
+          {
+            currentPosition.lat &&
+            (
+              <Marker position={currentPosition} />
+            )
+          }
+        </GoogleMap>
      </LoadScript>
   )
 }
