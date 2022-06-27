@@ -1,15 +1,28 @@
+@import '../index.scss';
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 header {
-    text-align: center;
-    background-color: rgb(229, 158, 15);
+    background-color: $global-light-green;
     margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    img {
+      width: 100px;
+      margin: 10px 5px;
+    }
     
     h1 {
-        margin: 0;
-        padding: 30px 0;
+        color: $global-dark-green;
+        outline: black;      
+        margin: 0 0 -38px 0;
+        padding: 0;
+        font-size: 100px;
+        height: fit-content;
     }
 
     h4 {

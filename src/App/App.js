@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useReducer } from 'react';
-import AppContext from './AppContext';
+import AppContext from '../AppContext';
+import BreweriesList from '../BreweriesList/BreweriesList';
 import './App.scss';
+import hop from '../assets/hop.png';
 
 const initialState = {
   breweries: [],
@@ -36,6 +38,7 @@ function App() {
       }
     } catch(error) {
       setError(error.message);
+      // display this somewhere else eventually
     }
   }
 
@@ -47,10 +50,12 @@ function App() {
     <AppContext.Provider value={[state, dispatch]}>
       <div>
         <header>
-          <h1>Colorado Brewery List</h1>
-          { error && <h4>error</h4> }
+          <img src={hop}/>
+          <h1>BeerHop</h1>
         </header>
-        <main>{JSON.stringify(state.breweries)}</main>
+        <main>
+          <BreweriesList />
+        </main>
         <footer>
           <button onClick={() => {
             if (state.currentPage > 1) {
