@@ -1,0 +1,18 @@
+@import '../index.scss';
+
+.card {
+  background-color: #20202061;
+  border-radius: 10px;
+  padding: 5px 10px;
+  min-width: 200px;
+
+  h2 {
+    font-size: 18px;
+    margin: 5px;
+  }
+
+  h3 {
+    font-size: 14px;
+    margin: 5px;
+  }
+}
