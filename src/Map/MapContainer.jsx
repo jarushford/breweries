@@ -5,6 +5,8 @@ import AppContext from '../AppContext';
 const MapContainer = () => {
   const [ currentPosition, setCurrentPosition ] = useState(null);
   const [ state, dispatch ] = useContext(AppContext);
+  const apiKey = process.env.REACT_APP_API_KEY;
+
 
   // I would like to implement this eventually, but having trouble making it work and also dynamically pulling the map bounds
   useEffect(() => {
@@ -49,7 +51,7 @@ const MapContainer = () => {
 
   return (
      <LoadScript
-       googleMapsApiKey='AIzaSyClqjDMJq60R-caqxkXXXX-W0tqN5kve_E'>
+       googleMapsApiKey={apiKey}>
         <GoogleMap
           mapContainerStyle={mapStyles}
           zoom={12}
