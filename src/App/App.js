@@ -7,7 +7,8 @@ import hop from '../assets/favicon.ico';
 
 const initialState = {
   breweries: [],
-  currentPage: 1
+  currentPage: 1,
+  closeBreweries: []
 }
 
 const reducer = (state, action) => {
@@ -16,6 +17,8 @@ const reducer = (state, action) => {
       return {...state, breweries: action.breweryList };
     case 'SET_CURRENT_PAGE':
       return {...state, currentPage: action.currentPage };
+    case 'SET_CLOSE_BREWERIES':
+      return {...state, closeBreweries: action.closeBreweries };
     default:
       return state;
   } 
@@ -45,7 +48,7 @@ function App() {
 
   useEffect(() => {
     getBreweries();
-    
+
   }, [state.currentPage])
 
   return (
