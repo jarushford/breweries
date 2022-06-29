@@ -1,7 +1,7 @@
 @import '../index.scss';
 
 .card {
-  background-color: #20202061;
+  background-color: #b9b9b961;
   border-radius: 10px;
   padding: 5px 10px;
   min-width: 200px;
@@ -9,10 +9,23 @@
   h2 {
     font-size: 18px;
     margin: 5px;
+    color: rgb(41, 41, 41)
   }
 
   h3 {
     font-size: 14px;
     margin: 5px;
+    color: rgb(41, 41, 41);
+  }
+
+  a[href^="http://"] {
+    text-decoration: none;
+    color: $global-dark-green;
+    transition: .2s;
+
+    &:hover {
+      color: $global-green;
+      transition: .2s;
+    }
   }
 }

@@ -64,29 +64,35 @@ function App() {
   return (
     <AppContext.Provider value={[state, dispatch]}>
       <div>
-        <header>
-          <img src={hop}/>
-          <h1>BeerHop</h1>
-        </header>
-        <MapContainer />
-        <main>
-          <div id="toggleBox">
-            <span>{state.currentMode}</span>
-            <input type="checkbox" id="switch" onClick={toggleCurrentMode}/><label htmlFor="switch">Toggle</label>
-          </div>
-          <BreweriesList />
-        </main>
-        <footer>
-          <button onClick={() => {
-            if (state.currentPage > 1) {
-              dispatch({ type: 'SET_CURRENT_PAGE', currentPage: state.currentPage - 1 })
-            }
-          }}> Back </button>
-          <h4>{state.currentPage}</h4>
-          <button onClick={() => {
-              dispatch({ type: 'SET_CURRENT_PAGE', currentPage: state.currentPage + 1 })
-          }}> Forward </button>
-        </footer>
+        <div id="fixed-section">
+          <header>
+            <img src={hop}/>
+            <h1>BeerHop</h1>
+          </header>
+          <MapContainer />
+        </div>
+        <div id="scroll-section">
+          <main>
+            <div id="toggleBox">
+              <div id="toggleBtn">
+                <span>{state.currentMode}</span>
+                <input type="checkbox" id="switch" onClick={toggleCurrentMode}/><label htmlFor="switch">Toggle</label>
+              </div>
+              <div id="page-btns">
+                <button onClick={() => {
+                  if (state.currentPage > 1) {
+                    dispatch({ type: 'SET_CURRENT_PAGE', currentPage: state.currentPage - 1 })
+                  }
+                }}> Back </button>
+                <h4>{state.currentPage}</h4>
+                <button onClick={() => {
+                    dispatch({ type: 'SET_CURRENT_PAGE', currentPage: state.currentPage + 1 })
+                }}> Forward </button>
+              </div>
+            </div>
+            <BreweriesList />
+          </main>
+        </div>
       </div>
     </AppContext.Provider>
   );
