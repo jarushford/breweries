@@ -8,8 +8,12 @@ import hop from '../assets/favicon.ico';
 const initialState = {
   breweries: [],
   currentPage: 1,
-  closeBreweries: []
+  closeBreweries: [],
+  currentMode: 'All'
 }
+
+// modes are 'All' and 'Local'
+
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -19,6 +23,8 @@ const reducer = (state, action) => {
       return {...state, currentPage: action.currentPage };
     case 'SET_CLOSE_BREWERIES':
       return {...state, closeBreweries: action.closeBreweries };
+    case 'TOGGLE_MODE':
+      return {...state, currentMode: action.mode };
     default:
       return state;
   } 
@@ -46,9 +52,13 @@ function App() {
     }
   }
 
+  const toggleCurrentMode = () => {
+    const mode = state.currentMode === 'All' ? 'Local' : 'All';
+    dispatch({ type: 'TOGGLE_MODE', mode })
+  }
+
   useEffect(() => {
     getBreweries();
-
   }, [state.currentPage])
 
   return (
@@ -60,6 +70,10 @@ function App() {
         </header>
         <MapContainer />
         <main>
+          <div id="toggleBox">
+            <span>{state.currentMode}</span>
+            <input type="checkbox" id="switch" onClick={toggleCurrentMode}/><label htmlFor="switch">Toggle</label>
+          </div>
           <BreweriesList />
         </main>
         <footer>
