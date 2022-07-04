@@ -1,6 +1,9 @@
+// GENERAL IMPORTS
+
 import React, { useState, useEffect, useContext } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import AppContext from '../AppContext';
+
 
 const MapContainer = () => {
   const [ currentPosition, setCurrentPosition ] = useState(null);
@@ -8,23 +11,42 @@ const MapContainer = () => {
   const apiKey = process.env.REACT_APP_API_KEY;
 
 
-  // I would like to implement this eventually, but having trouble making it work and also dynamically pulling the map bounds
+  // I would like to implement the closeBreweries based on this location eventually, but having trouble making it work while also dynamically pulling the map bounds, so for now the bounds are static based in downtown Longmont, CO
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(success);
   }, [])
+
+  const success = position => {
+    const current = {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude
+    }
+    setCurrentPosition(current);
+  }
+
+  // this will search the current list of state.breweries for ones w/in the current bounds every time that state.breweries is updated
 
   useEffect(() => {
     getCloseBreweries(bounds);
   }, [state.breweries])
 
 
-// eventually this will be dynamic
+  // eventually this will be dynamic as outlined above
+
   const bounds = {
     w: -105.251503,
     e: -104.960008,
     n: 40.206281,
     s: 40.116241
   }
+
+  const mapStyles = {        
+    height: "60vh",
+    width: "100%"
+  }
+
+  // getCloseBreweries will take in the bounds of the user's current location and update the AppContext state with an array of all of the breweries from state.breweries that are within those bounds
 
   const getCloseBreweries = bounds => {
     const closeBreweries = state.breweries.filter(b => {
@@ -35,19 +57,8 @@ const MapContainer = () => {
   
     dispatch({ type: 'SET_CLOSE_BREWERIES', closeBreweries })
   }
-  
-  const success = position => {
-    const current = {
-      lat: position.coords.latitude,
-      lng: position.coords.longitude
-    }
-    setCurrentPosition(current);
-  }
-  
-  const mapStyles = {        
-    height: "60vh",
-    width: "100%"
-  };
+
+  // dynamic return based on the current mode of the app ('All' or 'Local')
 
   if (state.currentMode === 'All') {
     return (

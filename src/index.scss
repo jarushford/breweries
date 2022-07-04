@@ -15,3 +15,10 @@ code {
 $global-green: #6fbf5f;
 $global-light-green: #91d96c;
 $global-dark-green: #53a554;
+
+
+:export {
+  globalGreen: $global-green;
+  globalLightGreen: $global-light-green;
+  globalDarkGreen: $global-dark-green;
+}

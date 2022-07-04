@@ -1,7 +1,16 @@
+// GENERAL IMPORTS
+
 import React, { useContext } from 'react';
 import AppContext from '../AppContext';
+
+// COMPONENTS
+
 import Card from '../Card/Card';
+
+// STYLES
+
 import './BreweriesList.scss';
+
 
 const BreweriesList = () => {
   const [state, dispatch] = useContext(AppContext);
