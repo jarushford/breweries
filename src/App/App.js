@@ -14,7 +14,7 @@ import Button from '../utils/Button/Button';
 
 import reducer from '../utils/reducer';
 import initialState from '../utils/state';
-import { getBreweries } from '../utils/fetch';
+import { getBreweries, getAllBreweries } from '../utils/fetch';
 
 // STYLES AND ASSETS
 
@@ -42,49 +42,45 @@ function App() {
 
   return (
     <AppContext.Provider value={[state, dispatch]}>
-      <div>
-        <div id="fixed-section">
-          <header>
-            <img src={hop}/>
-            <h1>BeerHop</h1>
-          </header>
-          <MapContainer />
-        </div>
-        <div id="scroll-section">
-          <main>
-            <div id="controlsBox">
-              {toggle( 
-                state.currentMode, 
-                toggleCurrentMode, 
-                "switch", 
-                variables.globalGreen
-              )}
-              <div id="page-btns">
-                <Button
-                  text='Back'
-                  action={() => {
-                    if (state.currentPage > 1) {
-                      dispatch({ type: 'SET_CURRENT_PAGE', currentPage: state.currentPage - 1 })
-                    }
-                  }}
-                  borderColor={variables.globalGreen}
-                  textColor={variables.globalGreen}
-                />
-                <h4>{state.currentPage}</h4>
-                <Button
-                  text='Forward' 
-                  action={() => { 
-                    dispatch({ type: 'SET_CURRENT_PAGE', currentPage: state.currentPage + 1 })
-                  }}
-                  borderColor={variables.globalGreen}
-                  textColor={variables.globalGreen}
-                />
-              </div>
-            </div>
-            <BreweriesList />
-          </main>
-        </div>
+      <div id="fixed-section">
+        <header>
+          <img src={hop}/>
+          <h1>BeerHop</h1>
+        </header>
+        <MapContainer />
       </div>
+      <main id="scroll-section">
+        <div id="controlsBox">
+          {toggle( 
+            state.currentMode, 
+            toggleCurrentMode, 
+            "switch", 
+            variables.globalGreen
+          )}
+          <div id="page-btns">
+            <Button
+              text='Back'
+              action={() => {
+                if (state.currentPage > 1) {
+                  dispatch({ type: 'SET_CURRENT_PAGE', currentPage: state.currentPage - 1 })
+                }
+              }}
+              borderColor={variables.globalGreen}
+              textColor={variables.globalGreen}
+            />
+            <h4>{state.currentPage}</h4>
+            <Button
+              text='Forward' 
+              action={() => { 
+                dispatch({ type: 'SET_CURRENT_PAGE', currentPage: state.currentPage + 1 })
+              }}
+              borderColor={variables.globalGreen}
+              textColor={variables.globalGreen}
+            />
+          </div>
+        </div>
+        <BreweriesList />
+      </main>
     </AppContext.Provider>
   )
 }

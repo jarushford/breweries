@@ -16,4 +16,8 @@ const getBreweries = async ( state, dispatch, error, setError  ) => {
   }
 }
 
-export { getBreweries };
+const getAllBreweries = async ( state, dispatch, error, setError ) => {
+
+}
+
+export { getBreweries, getAllBreweries };
