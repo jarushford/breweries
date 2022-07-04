@@ -7,6 +7,7 @@ import hop from '../assets/favicon.ico';
 import reducer from '../utils/reducer';
 import initialState from '../utils/state';
 import { getBreweries } from '../utils/fetch';
+import toggle from '../utils/toggle';
 
 
 function App() {
@@ -39,10 +40,7 @@ function App() {
         <div id="scroll-section">
           <main>
             <div id="toggleBox">
-              <div id="toggleBtn">
-                <span>{state.currentMode}</span>
-                <input type="checkbox" id="switch" onClick={toggleCurrentMode}/><label htmlFor="switch">Toggle</label>
-              </div>
+              {toggle( state.currentMode, toggleCurrentMode, "switch", "toggleBtn" )}
               <div id="page-btns">
                 <button onClick={() => {
                   if (state.currentPage > 1) {
