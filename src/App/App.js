@@ -8,6 +8,7 @@ import AppContext from '../AppContext';
 import BreweriesList from '../BreweriesList/BreweriesList';
 import MapContainer from '../Map/MapContainer';
 import toggle from '../utils/toggle/toggle';
+import Button from '../utils/Button/Button';
 
 // UTILITIES
 
@@ -59,15 +60,25 @@ function App() {
                 variables.globalGreen
               )}
               <div id="page-btns">
-                <button onClick={() => {
-                  if (state.currentPage > 1) {
-                    dispatch({ type: 'SET_CURRENT_PAGE', currentPage: state.currentPage - 1 })
-                  }
-                }}> Back </button>
+                <Button
+                  text='Back'
+                  action={() => {
+                    if (state.currentPage > 1) {
+                      dispatch({ type: 'SET_CURRENT_PAGE', currentPage: state.currentPage - 1 })
+                    }
+                  }}
+                  borderColor={variables.globalGreen}
+                  textColor={variables.globalGreen}
+                />
                 <h4>{state.currentPage}</h4>
-                <button onClick={() => {
+                <Button
+                  text='Forward' 
+                  action={() => { 
                     dispatch({ type: 'SET_CURRENT_PAGE', currentPage: state.currentPage + 1 })
-                }}> Forward </button>
+                  }}
+                  borderColor={variables.globalGreen}
+                  textColor={variables.globalGreen}
+                />
               </div>
             </div>
             <BreweriesList />
@@ -75,7 +86,7 @@ function App() {
         </div>
       </div>
     </AppContext.Provider>
-  );
+  )
 }
 
 export default App;
