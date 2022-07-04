@@ -49,33 +49,61 @@ const MapContainer = () => {
     width: "100%"
   };
 
-  return (
-     <LoadScript
-       googleMapsApiKey={apiKey}>
-        <GoogleMap
-          mapContainerStyle={mapStyles}
-          zoom={12}
-          center={currentPosition}>
-          {
-            currentPosition &&
-            (
-              <Marker
-                icon="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-                position={currentPosition}
-              />
-            )
-          }
-          {
-            state.closeBreweries && (
-              state.closeBreweries.map(b => {
-                return <Marker key={b.name} position={{ lat: parseFloat(b.latitude), lng: parseFloat(b.longitude) }} />
-              })
-            )
-          }
-        </GoogleMap>
-     </LoadScript>
-  )
+  if (state.currentMode === 'All') {
+    return (
+      <LoadScript
+        googleMapsApiKey={apiKey}>
+         <GoogleMap
+           mapContainerStyle={mapStyles}
+           zoom={7}
+           center={{ lat: 39.413014, lng: -105.358887 }}>
+           {
+             currentPosition &&
+             (
+               <Marker
+                 icon="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                 position={currentPosition}
+               />
+             )
+           }
+           {
+             state.breweries && (
+               state.breweries.map(b => {
+                 return <Marker key={b.name} position={{ lat: parseFloat(b.latitude), lng: parseFloat(b.longitude) }} />
+               })
+             )
+           }
+         </GoogleMap>
+      </LoadScript>
+   )
+  } else {
+    return (
+      <LoadScript
+        googleMapsApiKey={apiKey}>
+         <GoogleMap
+           mapContainerStyle={mapStyles}
+           zoom={12}
+           center={currentPosition}>
+           {
+             currentPosition &&
+             (
+               <Marker
+                 icon="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                 position={currentPosition}
+               />
+             )
+           }
+           {
+             state.closeBreweries && (
+               state.closeBreweries.map(b => {
+                 return <Marker key={b.name} position={{ lat: parseFloat(b.latitude), lng: parseFloat(b.longitude) }} />
+               })
+             )
+           }
+         </GoogleMap>
+      </LoadScript>
+    )
+  }
 }
 
 export default MapContainer;
-

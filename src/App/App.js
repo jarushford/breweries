@@ -4,25 +4,32 @@ import BreweriesList from '../BreweriesList/BreweriesList';
 import MapContainer from '../Map/MapContainer';
 import './App.scss';
 import hop from '../assets/favicon.ico';
+import reducer from '../utils/reducer';
 
 const initialState = {
   breweries: [],
   currentPage: 1,
-  closeBreweries: []
+  closeBreweries: [],
+  currentMode: 'All'
 }
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'SET_BREWERIES':
-      return {...state, breweries: action.breweryList };
-    case 'SET_CURRENT_PAGE':
-      return {...state, currentPage: action.currentPage };
-    case 'SET_CLOSE_BREWERIES':
-      return {...state, closeBreweries: action.closeBreweries };
-    default:
-      return state;
-  } 
-}
+// modes are 'All' and 'Local'
+
+
+// const reducer = (state, action) => {
+//   switch (action.type) {
+//     case 'SET_BREWERIES':
+//       return {...state, breweries: action.breweryList };
+//     case 'SET_CURRENT_PAGE':
+//       return {...state, currentPage: action.currentPage };
+//     case 'SET_CLOSE_BREWERIES':
+//       return {...state, closeBreweries: action.closeBreweries };
+//     case 'TOGGLE_MODE':
+//       return {...state, currentMode: action.mode };
+//     default:
+//       return state;
+//   } 
+// }
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -46,33 +53,47 @@ function App() {
     }
   }
 
+  const toggleCurrentMode = () => {
+    const mode = state.currentMode === 'All' ? 'Local' : 'All';
+    dispatch({ type: 'TOGGLE_MODE', mode })
+  }
+
   useEffect(() => {
     getBreweries();
-
   }, [state.currentPage])
 
   return (
     <AppContext.Provider value={[state, dispatch]}>
       <div>
-        <header>
-          <img src={hop}/>
-          <h1>BeerHop</h1>
-        </header>
-        <MapContainer />
-        <main>
-          <BreweriesList />
-        </main>
-        <footer>
-          <button onClick={() => {
-            if (state.currentPage > 1) {
-              dispatch({ type: 'SET_CURRENT_PAGE', currentPage: state.currentPage - 1 })
-            }
-          }}> Back </button>
-          <h4>{state.currentPage}</h4>
-          <button onClick={() => {
-              dispatch({ type: 'SET_CURRENT_PAGE', currentPage: state.currentPage + 1 })
-          }}> Forward </button>
-        </footer>
+        <div id="fixed-section">
+          <header>
+            <img src={hop}/>
+            <h1>BeerHop</h1>
+          </header>
+          <MapContainer />
+        </div>
+        <div id="scroll-section">
+          <main>
+            <div id="toggleBox">
+              <div id="toggleBtn">
+                <span>{state.currentMode}</span>
+                <input type="checkbox" id="switch" onClick={toggleCurrentMode}/><label htmlFor="switch">Toggle</label>
+              </div>
+              <div id="page-btns">
+                <button onClick={() => {
+                  if (state.currentPage > 1) {
+                    dispatch({ type: 'SET_CURRENT_PAGE', currentPage: state.currentPage - 1 })
+                  }
+                }}> Back </button>
+                <h4>{state.currentPage}</h4>
+                <button onClick={() => {
+                    dispatch({ type: 'SET_CURRENT_PAGE', currentPage: state.currentPage + 1 })
+                }}> Forward </button>
+              </div>
+            </div>
+            <BreweriesList />
+          </main>
+        </div>
       </div>
     </AppContext.Provider>
   );

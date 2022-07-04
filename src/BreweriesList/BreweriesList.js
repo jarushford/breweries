@@ -6,18 +6,31 @@ import './BreweriesList.scss';
 const BreweriesList = () => {
   const [state, dispatch] = useContext(AppContext);
 
-  const breweryCards = state.breweries.map((b, index) => {
-    return (
-      <Card 
-        brewery={b}
-        key={index}
-      />
-    )
-  })
+  const getBreweryCards = () => {
+    if (state.currentMode === 'All') {
+      return state.breweries.map((b, index) => {
+        return (
+          <Card 
+            brewery={b}
+            key={index}
+          />
+        )
+      })
+    } else {
+      return state.closeBreweries.map((b, index) => {
+        return (
+          <Card
+            brewery={b}
+            key={index}
+          />
+        )
+      })
+    }
+  }
 
   return (
     <div className="breweries-list">
-      {breweryCards}
+      {getBreweryCards()}
     </div>
   )
 }
