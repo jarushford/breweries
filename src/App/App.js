@@ -4,6 +4,7 @@ import BreweriesList from '../BreweriesList/BreweriesList';
 import MapContainer from '../Map/MapContainer';
 import './App.scss';
 import hop from '../assets/favicon.ico';
+import reducer from '../utils/reducer';
 
 const initialState = {
   breweries: [],
@@ -15,20 +16,20 @@ const initialState = {
 // modes are 'All' and 'Local'
 
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'SET_BREWERIES':
-      return {...state, breweries: action.breweryList };
-    case 'SET_CURRENT_PAGE':
-      return {...state, currentPage: action.currentPage };
-    case 'SET_CLOSE_BREWERIES':
-      return {...state, closeBreweries: action.closeBreweries };
-    case 'TOGGLE_MODE':
-      return {...state, currentMode: action.mode };
-    default:
-      return state;
-  } 
-}
+// const reducer = (state, action) => {
+//   switch (action.type) {
+//     case 'SET_BREWERIES':
+//       return {...state, breweries: action.breweryList };
+//     case 'SET_CURRENT_PAGE':
+//       return {...state, currentPage: action.currentPage };
+//     case 'SET_CLOSE_BREWERIES':
+//       return {...state, closeBreweries: action.closeBreweries };
+//     case 'TOGGLE_MODE':
+//       return {...state, currentMode: action.mode };
+//     default:
+//       return state;
+//   } 
+// }
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
