@@ -1,13 +1,25 @@
+// GENERAL IMPORTS
+
 import React, { useEffect, useState, useReducer } from 'react';
 import AppContext from '../AppContext';
+
+// COMPONENTS
+
 import BreweriesList from '../BreweriesList/BreweriesList';
 import MapContainer from '../Map/MapContainer';
-import './App.scss';
-import hop from '../assets/favicon.ico';
+import toggle from '../utils/toggle/toggle';
+
+// UTILITIES
+
 import reducer from '../utils/reducer';
 import initialState from '../utils/state';
 import { getBreweries } from '../utils/fetch';
-import toggle from '../utils/toggle';
+
+// STYLES AND ASSETS
+
+import './App.scss';
+import variables from '../index.scss';
+import hop from '../assets/favicon.ico';
 
 
 function App() {
@@ -39,8 +51,13 @@ function App() {
         </div>
         <div id="scroll-section">
           <main>
-            <div id="toggleBox">
-              {toggle( state.currentMode, toggleCurrentMode, "switch", "toggleBtn" )}
+            <div id="controlsBox">
+              {toggle( 
+                state.currentMode, 
+                toggleCurrentMode, 
+                "switch", 
+                variables.globalGreen
+              )}
               <div id="page-btns">
                 <button onClick={() => {
                   if (state.currentPage > 1) {

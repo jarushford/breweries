@@ -1,10 +1,13 @@
+// GENERAL IMPORTS
+
 import React, { useContext } from 'react';
-import AppContext from '../AppContext';
+
+// STYLES
+
 import './Card.scss';
 
-const Card = ({ brewery }) => {
-  const [state, dispatch] = useContext(AppContext);
 
+const Card = ({ brewery }) => {
   return (
     <article className="card">
       <h2><a href={brewery.website_url} target="_blank">{brewery.name}</a></h2>
