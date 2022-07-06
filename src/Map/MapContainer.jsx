@@ -79,8 +79,8 @@ const MapContainer = () => {
            }
            {
              state.breweries && (
-               state.breweries.map(b => {
-                 return <Marker key={b.name} position={{ lat: parseFloat(b.latitude), lng: parseFloat(b.longitude) }} />
+               state.breweries.map((b, id) => {
+                 return <Marker key={id} position={{ lat: parseFloat(b.latitude), lng: parseFloat(b.longitude) }} />
                })
              )
            }
@@ -106,8 +106,8 @@ const MapContainer = () => {
            }
            {
              state.closeBreweries && (
-               state.closeBreweries.map(b => {
-                 return <Marker key={b.name} position={{ lat: parseFloat(b.latitude), lng: parseFloat(b.longitude) }} />
+               state.closeBreweries.map((b, id) => {
+                 return <Marker key={id} position={{ lat: parseFloat(b.latitude), lng: parseFloat(b.longitude) }} />
                })
              )
            }

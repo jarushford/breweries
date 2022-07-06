@@ -37,7 +37,8 @@ function App() {
   // when state.currentPage is updated, getBreweries will be called again, passing the necessary references to state, dispatch, and setError
 
   useEffect(() => {
-    getBreweries( state, dispatch, error, setError );
+    // getBreweries( state, dispatch, error, setError );
+    getAllBreweries(dispatch);
   }, [state.currentPage])
 
   return (
